@@ -1,0 +1,176 @@
+================================================================================
+                  PARKINSON'S AI ENSEMBLE - MODEL WEIGHTS
+================================================================================
+
+PART 1: MASTER ENSEMBLE VOTING WEIGHTS
+--------------------------------------------------------------------------------
+These are the voting weights assigned to each of the 12 tests when the Master
+Algorithm calculates the final diagnosis. They are based on the baseline
+historical accuracy of each test.
+
+Task Name            | Base Accuracy   | Voting Weight %
+-------------------------------------------------------
+Questionnaire        | 77.0         % | 9.9          %
+Resting Wrist        | 75.0         % | 9.6          %
+Drink Glass          | 70.0         % | 9.0          %
+Touch Index          | 65.7         % | 8.4          %
+Entrainment          | 65.0         % | 8.3          %
+Relaxed Task         | 65.0         % | 8.3          %
+Touch Nose           | 63.0         % | 8.1          %
+Point Finger         | 60.0         % | 7.7          %
+Lift Hold            | 60.0         % | 7.7          %
+Stretch Hold         | 60.0         % | 7.7          %
+Hold Weight          | 60.0         % | 7.7          %
+Cross Arms           | 60.0         % | 7.7          %
+
+
+PART 2: INTERNAL RANDOM FOREST FEATURE WEIGHTS (IMPORTANCES)
+--------------------------------------------------------------------------------
+These are the internal weights (feature importances) that each Random Forest
+uses to make its decision. It shows which specific kinematic metrics or
+questionnaire answers were the strongest predictors of the disease.
+
+--- [ QUESTIONNAIRE ] ---
+  1.   7.4%  ->  Loss or change in your ability to taste or smell
+  2.   6.8%  ->  Talking or moving about in your sleep as if you are acting out a dream
+  3.   5.6%  ->  A sense of urgency to pass urine makes you rush to the toilet
+  4.   5.5%  ->  Getting up regularly at night to pass urine
+  5.   4.8%  ->  Difficulty swallowing food or drink or problems with choking
+  6.   4.7%  ->  Feeling light headed, dizzy or weak standing from sitting or lying
+  7.   4.6%  ->  Dribbling of saliva during the daytime
+  8.   4.1%  ->  Constipation (less than 3 bowel movements a week) or having to strain to pass a stool (faeces)
+  9.   4.0%  ->  Loss of interest in what is happening around you or doing things
+  10.   3.8%  ->  Problems remembering things that have happened recently or forgetting to do things
+
+--- [ RESTING WRIST ] ---
+  1.   4.6%  ->  ASYMMETRY Gyro Std Last 3s
+  2.   3.5%  ->  Left Wrist Acc Std Z
+  3.   3.3%  ->  Right Wrist Gyro Tremor Peak Freq
+  4.   3.2%  ->  ASYMMETRY Acc Std Last 3s
+  5.   3.1%  ->  ASYMMETRY Max Gyro Std
+  6.   3.1%  ->  Right Wrist Acc Tremor Peak Freq
+  7.   2.9%  ->  Left Wrist Gyro Tremor Peak Freq
+  8.   2.7%  ->  Left Wrist Acc Tremor Peak Freq
+  9.   2.6%  ->  Right Wrist Acc Std Z
+  10.   2.6%  ->  Right Wrist Max Gyro Std
+
+--- [ DRINK GLASS ] ---
+  1.   3.3%  ->  Right Gyro Tremor Peak Amp
+  2.   3.0%  ->  Right Gyro Std Z (wrist yaw)
+  3.   2.7%  ->  ASYMMETRY Gyro Tremor Peak Amp
+  4.   2.6%  ->  Right Movement Jerk (Gyro)
+  5.   2.6%  ->  Right Q1 Reaching Phase Shake
+  6.   2.5%  ->  Left Movement Jerk (Gyro)
+  7.   2.5%  ->  Right Q2 Lifting Phase Shake
+  8.   2.5%  ->  Left Acc Tremor Peak Amp
+  9.   2.4%  ->  Right Gyro Tremor Peak Freq (Hz)
+  10.   2.4%  ->  Right Q3 Drinking Phase Shake
+
+--- [ TOUCH INDEX ] ---
+  1.   3.4%  ->  ASYMMETRY Acc Tremor Peak Amp
+  2.   3.2%  ->  Left Acc Tremor Peak Amp
+  3.   3.1%  ->  Right Acc Tremor Peak Freq (Hz)
+  4.   2.8%  ->  Left Acc Tremor Mean Power
+  5.   2.8%  ->  ASYMMETRY First Half Shake
+  6.   2.8%  ->  Left Gyro Std Y (wrist pitch)
+  7.   2.7%  ->  Right Gyro Tremor Peak Amp
+  8.   2.6%  ->  ASYMMETRY Movement Jerk (Acc)
+  9.   2.5%  ->  ASYMMETRY Fatigue Ratio
+  10.   2.5%  ->  Right Acc Tremor Mean Power
+
+--- [ ENTRAINMENT ] ---
+  1.   3.5%  ->  ASYMMETRY Gyro Tremor Peak Amp
+  2.   2.9%  ->  ASYMMETRY Movement Jerk (Gyro)
+  3.   2.8%  ->  Left Acc Std Z (forward-back shake)
+  4.   2.8%  ->  ASYMMETRY Movement Jerk (Acc)
+  5.   2.6%  ->  Left Acc Tremor Peak Amp
+  6.   2.5%  ->  Left Acc Std X (side-to-side shake)
+  7.   2.5%  ->  Left Movement Jerk (Acc)
+  8.   2.4%  ->  Right Acc Std X (side-to-side shake)
+  9.   2.4%  ->  ASYMMETRY Max Acc Std
+  10.   2.2%  ->  Right Acc Std Z (forward-back shake)
+
+--- [ RELAXED TASK ] ---
+  1.   4.1%  ->  ASYMMETRY Gyro Tremor Peak Amp
+  2.   3.4%  ->  Right Gyro Tremor Peak Freq (Hz)
+  3.   2.9%  ->  ASYMMETRY Fatigue Ratio
+  4.   2.7%  ->  ASYMMETRY Movement Jerk (Acc)
+  5.   2.6%  ->  Right Gyro Tremor Peak Amp
+  6.   2.6%  ->  ASYMMETRY Acc Tremor Peak Amp
+  7.   2.6%  ->  Left Gyro Std Y (wrist pitch)
+  8.   2.4%  ->  Left Tremor Drift Rate (slope of shaking)
+  9.   2.3%  ->  ASYMMETRY Second Half Shake
+  10.   2.3%  ->  Left Gyro Tremor Peak Freq (Hz)
+
+--- [ TOUCH NOSE ] ---
+  1.   3.6%  ->  Right Gyro Std Y (wrist pitch)
+  2.   3.4%  ->  Left Gyro Std Y (wrist pitch)
+  3.   2.8%  ->  ASYMMETRY Acc Tremor Peak Amp
+  4.   2.8%  ->  Left Acc Std X (side-to-side shake)
+  5.   2.5%  ->  Left Gyro Std Z (wrist yaw)
+  6.   2.4%  ->  ASYMMETRY Movement Jerk (Acc)
+  7.   2.4%  ->  Left Gyro Tremor Peak Amp
+  8.   2.3%  ->  ASYMMETRY Movement Jerk (Gyro)
+  9.   2.3%  ->  Right Acc Tremor Peak Freq (Hz)
+  10.   2.3%  ->  Right Gyro Std Z (wrist yaw)
+
+--- [ POINT FINGER ] ---
+  1.   3.3%  ->  Left Max Gyro Std (worst rotation axis)
+  2.   3.0%  ->  Right Gyro Tremor Mean Power
+  3.   2.8%  ->  ASYMMETRY Movement Jerk (Acc)
+  4.   2.8%  ->  Right Gyro Tremor Peak Amp
+  5.   2.6%  ->  Left Acc Std X (side-to-side shake)
+  6.   2.5%  ->  Right First Half Shake (early fatigue)
+  7.   2.4%  ->  Left Tremor Drift Rate (slope of shaking)
+  8.   2.3%  ->  Right Fatigue Ratio (worsening over time)
+  9.   2.3%  ->  Left Gyro Std Z (wrist yaw)
+  10.   2.3%  ->  ASYMMETRY Max Gyro Std
+
+--- [ LIFT HOLD ] ---
+  1.   4.3%  ->  Right Second Half Shake (late fatigue)
+  2.   3.7%  ->  Left Second Half Shake (late fatigue)
+  3.   2.9%  ->  Left Movement Jerk (Gyro)
+  4.   2.8%  ->  Right Fatigue Ratio (worsening over time)
+  5.   2.8%  ->  Right Acc Tremor Peak Freq (Hz)
+  6.   2.7%  ->  Left Acc Tremor Peak Freq (Hz)
+  7.   2.7%  ->  Right Gyro Tremor Peak Amp
+  8.   2.5%  ->  Left Movement Jerk (Acc)
+  9.   2.4%  ->  Left Acc Tremor Peak Amp
+  10.   2.4%  ->  ASYMMETRY Movement Jerk (Gyro)
+
+--- [ STRETCH HOLD ] ---
+  1.   3.7%  ->  Left Gyro Tremor Mean Power
+  2.   3.6%  ->  ASYMMETRY Acc Tremor Peak Amp
+  3.   3.3%  ->  Left Second Half Shake (late fatigue)
+  4.   3.1%  ->  Left Gyro Tremor Peak Amp
+  5.   2.9%  ->  Right Second Half Shake (late fatigue)
+  6.   2.7%  ->  Left Acc Tremor Peak Amp
+  7.   2.7%  ->  Left Movement Jerk (Gyro)
+  8.   2.6%  ->  Left Max Gyro Std (worst rotation axis)
+  9.   2.4%  ->  Right Gyro Tremor Mean Power
+  10.   2.4%  ->  Right Acc Tremor Peak Amp
+
+--- [ HOLD WEIGHT ] ---
+  1.   3.9%  ->  Left Gyro Tremor Mean Power
+  2.   3.9%  ->  Left Gyro Tremor Peak Amp
+  3.   3.9%  ->  Right Gyro Tremor Peak Amp
+  4.   3.4%  ->  Right Gyro Tremor Mean Power
+  5.   3.1%  ->  Left Second Half Shake (late fatigue)
+  6.   3.0%  ->  Right Movement Jerk (Gyro)
+  7.   2.8%  ->  Right Second Half Shake (late fatigue)
+  8.   2.6%  ->  Right Gyro Tremor Peak Freq (Hz)
+  9.   2.4%  ->  Left Movement Jerk (Gyro)
+  10.   2.3%  ->  Left Gyro Tremor Peak Freq (Hz)
+
+--- [ CROSS ARMS ] ---
+  1.   4.6%  ->  Left Second Half Shake (late fatigue)
+  2.   3.8%  ->  ASYMMETRY Movement Jerk (Gyro)
+  3.   3.2%  ->  Right Second Half Shake (late fatigue)
+  4.   3.1%  ->  ASYMMETRY Second Half Shake
+  5.   3.0%  ->  ASYMMETRY Acc Tremor Peak Amp
+  6.   2.9%  ->  Right Gyro Std Y (wrist pitch)
+  7.   2.8%  ->  ASYMMETRY Movement Jerk (Acc)
+  8.   2.6%  ->  Left Gyro Std Z (wrist yaw)
+  9.   2.5%  ->  Left Gyro Std Y (wrist pitch)
+  10.   2.4%  ->  Right Acc Tremor Peak Freq (Hz)
+
