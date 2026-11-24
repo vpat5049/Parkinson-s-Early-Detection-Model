@@ -1,56 +1,104 @@
-# Parkinson's Disease Ensemble Diagnostic AI
+# Parkinson's Disease Multimodal AI Diagnostic System (with Web UI)
 
-An advanced Machine Learning ensemble model that diagnoses Parkinson's Disease by cross-referencing 11 kinematic smartwatch tasks and a 30-item clinical questionnaire. 
+An advanced Machine Learning clinical decision-support system that diagnoses Parkinson's Disease by fusing data across 11 high-frequency kinematic smartwatch tasks and a 30-item clinical questionnaire.
 
-This project aims to solve the "Essential Tremor Overlap" problem—where early-stage Parkinson's action tremors look mathematically identical to Essential Tremors in raw smartwatch data. By fusing data across multiple modalities using a weighted ensemble of Random Forest Classifiers, the AI successfully differentiates between Healthy patients, Essential Tremor patients, and Parkinson's patients.
+This system specifically addresses and resolves the clinical **"Essential Tremor Overlap"** problem—where early-stage Parkinsonian action tremors share frequency and amplitude similarities with Essential Tremor. By utilizing a **3-Class Weighted Ensemble** of 12 specialized Random Forest classifiers, the AI reliably distinguishes between:
+1. 🟢 **Healthy Controls**
+2. 🔴 **Parkinson's Disease**
+3. 🟡 **Other Movement Disorders** (Essential Tremor, Multiple Sclerosis, Atypical Parkinsonism)
 
-## Architecture
-The system consists of **12 independent algorithms** that each specialize in extracting features from a specific task (e.g., drinking from a glass, resting the wrist, lifting a weight, etc.). 
+---
 
-1. **`master_diagnosis.py`**: The central brain. It imports all 12 modules, queries their individual Random Forest models for a specific patient, and calculates a mathematically weighted average to output a final diagnosis.
-2. **`Algorithms/*_weightage.py`**: The 12 independent scripts. Each processes raw JSON sensor data (Accelerometer & Gyroscope at 100Hz), extracts kinematic features (Tremor Amplitude, Tremor Frequency 4-10Hz, Jerk, and Left/Right Asymmetry), and trains a Random Forest.
+## Key Features
 
-## Setup Instructions
+- **Interactive Streamlit Web Dashboard (`app.py`):**
+  - Modern clinical UI with white-on-dark contrast header banner and sleek styling.
+  - Sidebar patient navigator across 470 clinical study subjects with ground-truth filtering and a full-width **🎲 Pick Random Patient** button.
+  - Color-coded diagnostic prediction cards with confidence scores and verification match indicators.
+  - **3-Way Probability Meter:** Real-time distribution across Healthy %, Parkinson's %, and Other Movement Disorders %.
+  - **💡 Diagnostic Reasoning & Probability Explanation:** An automated, natural-language clinical rationale explaining *why* the AI assigned each probability percentage based on voting consensus, non-motor markers (smell loss, REM sleep dream enactment), and sensor kinematics.
+  - **📊 12-Model Ensemble Voting Tab:** Interactive Plotly horizontal bar chart displaying individual model confidences and effective ensemble voting weights.
+  - **📋 Non-Motor Symptoms Tab:** Full 30-item questionnaire response inspector with highlighted early prodromal markers.
+  - **👤 Patient Demographics Tab:** Detailed clinical profile, age, gender, handedness, and neurologist notes.
+  - **⚙️ Global Model Architecture & Ensemble Weights:** Complete reference table at the bottom of the page detailing each task's domain, base accuracy, and ensemble voting weight.
 
-### 1. Install Dependencies
-Make sure you have Python 3 installed. Run the following command to install the required libraries:
+- **Command-Line Interface (`master_diagnosis.py`):**
+  - Lightweight, headless terminal mode for running batch diagnostics and testing without a browser.
+
+- **Intelligent Engine Caching (`diagnostic_engine.py`):**
+  - Caches the 12 background Random Forest models in memory so switching between patients is instantaneous with zero reload lag.
+
+---
+
+## Architecture Overview
+
+The system consists of **12 specialized machine learning modules** operating under a **Late Decision Fusion** weighted ensemble architecture:
+
+| Task Name | Data Domain | Base Accuracy | Ensemble Voting Weight | Primary Biomarkers Extracted |
+| :--- | :--- | :---: | :---: | :--- |
+| **Questionnaire** | Clinical Non-Motor | **77.0%** | **9.9%** | Hyposmia, REM Sleep Behavior, Dysautonomia |
+| **Resting Wrist** | Kinematic (Rest) | **75.0%** | **9.6%** | 4–6 Hz Rest Tremor Power, L/R Asymmetry |
+| **Drink Glass** | Kinematic (Kinetic) | **70.0%** | **9.0%** | Action Tremor, Movement Jerk, Deceleration |
+| **Touch Index** | Kinematic (Coordination)| **65.7%** | **8.4%** | Target Acquisition Stability, Rapid Deceleration |
+| **Entrainment** | Kinematic (Rhythm) | **65.0%** | **8.3%** | Frequency Shifting, Rhythmic Entrainment |
+| **Relaxed Task** | Kinematic (Postural) | **65.0%** | **8.3%** | Postural Tremor Drift, Signal Entropy |
+| **Touch Nose** | Kinematic (Target) | **63.0%** | **8.1%** | Intention Tremor, Terminal Deceleration |
+| **Point Finger** | Kinematic (Postural) | **60.0%** | **7.7%** | Sustained Postural Instability |
+| **Lift Hold** | Kinematic (Fatigue) | **60.0%** | **7.7%** | Tremor Amplification Over Time |
+| **Stretch Hold** | Kinematic (Postural) | **60.0%** | **7.7%** | Gravity Resistance & Fatigue Ratio |
+| **Hold Weight** | Kinematic (Loaded) | **60.0%** | **7.7%** | Loaded Kinetic Oscillation |
+| **Cross Arms** | Kinematic (Postural) | **60.0%** | **7.7%** | Bilateral Tremor Asymmetry |
+
+---
+
+## Setup & Installation
+
+### 1. Requirements
+Ensure you have Python 3.9+ installed. Install the necessary dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Download the Dataset
-This project is built to process the **PADS (Parkinson's Disease Smartwatch Dataset)**. Because of its large size, the raw data is not included in this repository.
-1. Download the dataset (e.g., from PhysioNet).
-2. Extract it into the root directory of this project.
-3. Make sure the folder is named exactly: `pads-parkinsons-disease-smartwatch-dataset-1.0.0`
+*(Packages included in `requirements.txt`: `numpy`, `pandas`, `scikit-learn`, `scipy`, `streamlit`, `plotly`)*
 
-Your folder structure should look like this:
-```
-ParkinsonsAIProject/
-│
-├── Algorithms/
-│   ├── master_diagnosis.py
-│   ├── drinkglas_weightage.py
-│   └── ... (other 11 algorithms)
-│
-├── pads-parkinsons-disease-smartwatch-dataset-1.0.0/
-│   ├── movement/
-│   ├── patients/
-│   └── questionnaire/
-│
+### 2. Dataset Setup
+This project processes the **PADS (Parkinson's Disease Smartwatch Dataset)**:
+1. Extract the dataset into the project root directory.
+2. Confirm the directory structure matches:
+```text
+ParkinsonsAIProjectWithUI/
+├── app.py
+├── diagnostic_engine.py
 ├── requirements.txt
-└── README.md
+├── README.md
+├── Algorithms/
+│   └── Main Algorithms/
+│       ├── master_diagnosis.py
+│       ├── questionnaire_weightage.py
+│       ├── resting_wrist_weightage.py
+│       └── ... (remaining task algorithms)
+└── pads-parkinsons-disease-smartwatch-dataset-1.0.0/
+    ├── movement/
+    ├── patients/
+    └── questionnaire/
 ```
+
+---
 
 ## How to Run
 
-To run the master diagnostic tool, open your terminal and execute:
+### Method 1: Interactive Web Dashboard (Recommended)
+Open your terminal and run:
 ```bash
-python3 Algorithms/master_diagnosis.py
+cd ~/Desktop/ParkinsonsAIProjectWithUI
+python3 -m streamlit run app.py
 ```
-*(On Windows, use `python` instead of `python3`)*
+*Your browser will automatically open to `http://localhost:8501`.*
 
-**What happens next?**
-1. The script will quietly boot up and train all 12 Random Forests in the background (this takes ~30 seconds).
-2. It will prompt you to enter a **Patient ID** (e.g., `21`, `94`, `470`).
-3. It will output a detailed diagnosis report, showing exactly how each of the 12 models voted, their confidence levels, and the final weighted ensemble prediction.
+### Method 2: Command-Line Terminal Interface
+If you want to run a quick test from the command line:
+```bash
+cd ~/Desktop/ParkinsonsAIProjectWithUI
+python3 "Algorithms/Main Algorithms/master_diagnosis.py" --id 28
+```
+*(Or omit `--id` for an interactive terminal prompt)*
